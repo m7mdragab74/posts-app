@@ -1,14 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:posts_app/models/post_model.dart';
+import 'package:posts_app/services/post_services.dart';
+import 'package:posts_app/widget/post_widget.dart';
+import 'package:dio/dio.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late Future<List<PostModel>> postsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    PostService postService = PostService(Dio());
+    postsFuture = postService.getPostsTitleAndInfo();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Posts Threads',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -16,32 +34,24 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(13),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Title',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Text(
-              'decreption ................................................................',
-              overflow: TextOverflow.ellipsis,
-              maxLines: 5,
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            )
-          ],
-        ),
+      body: FutureBuilder<List<PostModel>>(
+        future: postsFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                return PostWidget(postModel: snapshot.data![index]);
+              },
+            );
+          } else {
+            return const Center(child: Text('No posts available.'));
+          }
+        },
       ),
     );
   }

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:posts_app/models/post_model.dart';
 
 class PostWidget extends StatelessWidget {
-  const PostWidget({super.key, required this.title, required this.info});
-  final String title;
-  final String info;
+  const PostWidget({
+    super.key,
+    required this.postModel,
+  });
+
+  final PostModel postModel;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -13,7 +18,7 @@ class PostWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            title,
+            postModel.title,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 25,
@@ -23,13 +28,13 @@ class PostWidget extends StatelessWidget {
             height: 5,
           ),
           Text(
-            info,
+            postModel.body,
             overflow: TextOverflow.ellipsis,
             maxLines: 5,
             style: const TextStyle(
               fontSize: 18,
             ),
-          )
+          ),
         ],
       ),
     );

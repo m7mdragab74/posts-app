@@ -1,16 +1,16 @@
 class PostModel {
   final String title;
-  final String info;
+  final String body;
 
   PostModel({
     required this.title,
-    required this.info,
+    required this.body,
   });
 
-  factory PostModel.fromJson(json) {
+  factory PostModel.fromJson(Map<String, dynamic> json) {
     return PostModel(
       title: json['title'],
-      info: json['info'],
+      body: json['body'],
     );
   }
 }

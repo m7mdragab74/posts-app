@@ -8,9 +8,9 @@ class PostService {
 
   Future<List<PostModel>> getPostsTitleAndInfo() async {
     try {
-      Response response = await dio.get('path');
-      Map<String, dynamic> jsonData = response.data;
-      List<dynamic> posts = jsonData['posts'];
+      Response response =
+          await dio.get('https://jsonplaceholder.typicode.com/posts');
+      List<dynamic> posts = response.data;
       List<PostModel> postList = [];
 
       for (var post in posts) {
