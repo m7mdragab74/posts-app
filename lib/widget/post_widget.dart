@@ -21,6 +21,7 @@ class PostWidget extends StatelessWidget {
             postModel.title,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
+              color: Colors.white,
               fontSize: 25,
             ),
           ),
@@ -32,6 +33,7 @@ class PostWidget extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 5,
             style: const TextStyle(
+              color: Colors.white,
               fontSize: 18,
             ),
           ),

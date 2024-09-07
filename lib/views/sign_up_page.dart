@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:posts_app/views/home.dart';
-import 'package:posts_app/widget/agree_terms.dart';
-import 'package:posts_app/widget/custom_botton.dart';
-import 'package:posts_app/widget/custom_text_field.dart';
+import 'package:posts_app/widget/signUp/agree_terms.dart';
+import 'package:posts_app/widget/signUp/custom_botton.dart';
+import 'package:posts_app/widget/signUp/custom_text_field.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
@@ -10,7 +10,7 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff222337),
+      backgroundColor: const Color(0xff222337),
       body: ListView(
         children: [
           Padding(
@@ -40,7 +40,7 @@ class SignUpPage extends StatelessWidget {
                 ),
                 CustomTextField(
                   label: 'Email',
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.mail,
                   ),
                   onChange: (value) {},
@@ -50,7 +50,7 @@ class SignUpPage extends StatelessWidget {
                 ),
                 CustomTextField(
                   label: 'Mobile Number',
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.phone_iphone_outlined,
                   ),
                   onChange: (value) {},
@@ -60,7 +60,7 @@ class SignUpPage extends StatelessWidget {
                 ),
                 CustomTextField(
                   label: 'Image Url',
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.image,
                   ),
                   onChange: (value) {},
@@ -70,7 +70,7 @@ class SignUpPage extends StatelessWidget {
                 ),
                 CustomTextField(
                   label: 'Password',
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.visibility_off,
                   ),
                   onChange: (value) {},
@@ -90,7 +90,7 @@ class SignUpPage extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => HomePage(),
+                        builder: (context) => const HomePage(),
                       ),
                     );
                   },

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:posts_app/views/sign_up_page.dart';
 
 void main() {
-  runApp(PostsApp());
+  runApp(const PostsApp());
 }
 
 class PostsApp extends StatelessWidget {
@@ -10,7 +10,7 @@ class PostsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SignUpPage(),
     );

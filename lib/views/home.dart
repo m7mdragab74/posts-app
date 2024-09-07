@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:posts_app/models/post_model.dart';
 import 'package:posts_app/services/post_services.dart';
+import 'package:posts_app/views/fav_page.dart';
+import 'package:posts_app/views/profile_page.dart';
+import 'package:posts_app/widget/custom_nav_bar.dart';
 import 'package:posts_app/widget/post_widget.dart';
 import 'package:dio/dio.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
+  static const primaryColor = Colors.blue;
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<List<PostModel>> postsFuture;
+  int _selectedIndex = 0;
 
+  late Future<List<PostModel>> postsFuture;
   @override
   void initState() {
     super.initState();
@@ -24,15 +29,33 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff222337),
+      bottomNavigationBar: CustomBottomNavBar(
+        pages: const [
+          HomePage(),
+          FavPage(),
+          ProfilePage(),
+        ],
+        color: HomePage.primaryColor,
+        selectedIndex: _selectedIndex,
+        onItemSelected: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+      ),
       appBar: AppBar(
+        backgroundColor: const Color(0xff222337),
         centerTitle: true,
         title: const Text(
           'Posts Threads',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 25,
+            color: Colors.white,
           ),
         ),
+        automaticallyImplyLeading: false,
       ),
       body: FutureBuilder<List<PostModel>>(
         future: postsFuture,

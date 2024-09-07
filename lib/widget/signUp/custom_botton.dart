@@ -20,12 +20,12 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        side: BorderSide(color: Colors.white),
+        side: const BorderSide(color: Colors.white),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
         minimumSize: Size(double.infinity, height),
-        backgroundColor: Color(0xff323243),
+        backgroundColor: const Color(0xff323243),
         padding: EdgeInsets.symmetric(vertical: height / 3),
       ),
       onPressed: onTap,
