@@ -79,7 +79,7 @@ class CustomBottomNavBar extends StatelessWidget {
             icon,
             color: selectedIndex == index
                 ? const Color(0xff323243)
-                : Color(0xff242639),
+                : const Color(0xff242639),
             size: 24,
           ),
           const SizedBox(height: 4),
@@ -88,7 +88,7 @@ class CustomBottomNavBar extends StatelessWidget {
             style: TextStyle(
               color: selectedIndex == index
                   ? const Color(0xff323243)
-                  : Color(0xff242639),
+                  : const Color(0xff242639),
               fontWeight: FontWeight.w600,
               fontSize: 12,
             ),

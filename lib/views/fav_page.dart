@@ -35,16 +35,16 @@ class _FavPageState extends State<FavPage> {
         automaticallyImplyLeading: false,
         backgroundColor: const Color(0xff222337),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Favorite Posts',
           style: TextStyle(
             color: Colors.white,
           ),
         ),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
-          'No Avilabel Fav post yet',
+          'No Available Fav post yet',
           style: TextStyle(
             color: Colors.white,
           ),
