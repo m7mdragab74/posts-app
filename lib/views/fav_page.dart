@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:posts_app/database/db_helper.dart';
+import 'package:posts_app/models/post_model.dart';
 import 'package:posts_app/views/home.dart';
 import 'package:posts_app/views/profile_page.dart';
 import 'package:posts_app/widget/custom_nav_bar.dart';
+import 'package:posts_app/widget/post_widget.dart';
 
 class FavPage extends StatefulWidget {
   const FavPage({super.key});
@@ -11,7 +14,52 @@ class FavPage extends StatefulWidget {
 }
 
 class _FavPageState extends State<FavPage> {
-  int _selectedIndex = 1;
+  List<PostModel> _favorites = [];
+  bool _isLoading = true;
+  int _selectedIndex = 1; // Default to FavPage
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchFavorites();
+  }
+
+  Future<void> _fetchFavorites() async {
+    final db = DatabaseHelper();
+    final favorites = await db.getFavorites();
+    setState(() {
+      _favorites = favorites;
+      _isLoading = false;
+    });
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    // Navigate to the selected page
+    switch (index) {
+      case 0:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+        break;
+      case 1:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const FavPage()),
+        );
+        break;
+      case 2:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ProfilePage()),
+        );
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +73,7 @@ class _FavPageState extends State<FavPage> {
         ],
         color: HomePage.primaryColor,
         selectedIndex: _selectedIndex,
-        onItemSelected: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
+        onItemSelected: _onItemTapped, // Handle page navigation
       ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -37,19 +81,26 @@ class _FavPageState extends State<FavPage> {
         centerTitle: true,
         title: const Text(
           'Favorite Posts',
-          style: TextStyle(
-            color: Colors.white,
-          ),
+          style: TextStyle(color: Colors.white),
         ),
       ),
-      body: const Center(
-        child: Text(
-          'No Available Fav post yet',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : _favorites.isEmpty
+              ? const Center(
+                  child: Text(
+                    'No favorites yet',
+                    style: TextStyle(color: Colors.white), // Make text visible
+                  ),
+                )
+              : ListView.builder(
+                  itemCount: _favorites.length,
+                  itemBuilder: (context, index) {
+                    return PostWidget(
+                      postModel: _favorites[index],
+                    );
+                  },
+                ),
     );
   }
 }
