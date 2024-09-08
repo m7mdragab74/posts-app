@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:posts_app/models/data.dart';
 import 'package:posts_app/views/fav_page.dart';
 import 'package:posts_app/views/home.dart';
 import 'package:posts_app/widget/custom_nav_bar.dart';
 import 'package:posts_app/widget/profile/photo.dart';
 import 'package:posts_app/widget/profile/profile_options.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -33,60 +35,72 @@ class _ProfilePageState extends State<ProfilePage> {
           });
         },
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(12),
+      body: Padding(
+        padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 33,
             ),
-            BuildProfilePicture(
+            const BuildProfilePicture(
               color: Color(0xFFCF4D68),
             ),
-            SizedBox(
+            const SizedBox(
               height: 33,
             ),
-            Text(
-              'Mohamed Ragab',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 23,
-                color: Colors.white,
-              ),
+            Consumer<postsDataModel>(
+              builder: (context, failName, child) {
+                return Text(
+                  failName.name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 23,
+                    color: Colors.white,
+                  ),
+                );
+              },
             ),
-            SizedBox(
+            const SizedBox(
               height: 33,
             ),
-            ProfileOptions(
-              title: 'mr341349@gmail.com',
-              icon: Icons.mail,
+            Consumer<postsDataModel>(
+              builder: (context, failEmail, child) {
+                return ProfileOptions(
+                  title: '${failEmail.email}',
+                  icon: Icons.mail,
+                );
+              },
             ),
-            SizedBox(
+            const SizedBox(
               height: 19,
             ),
-            ProfileOptions(
-              title: '01060659309',
-              icon: Icons.phone,
+            Consumer<postsDataModel>(
+              builder: (context, mobile, child) {
+                return ProfileOptions(
+                  title: '${mobile.phoneNumber}',
+                  icon: Icons.phone,
+                );
+              },
             ),
-            SizedBox(
+            const SizedBox(
               height: 19,
             ),
-            ProfileOptions(
+            const ProfileOptions(
               title: 'Tell Your Friends',
               icon: Icons.send_rounded,
             ),
-            SizedBox(
+            const SizedBox(
               height: 19,
             ),
-            ProfileOptions(
+            const ProfileOptions(
               title: 'Settings',
               icon: Icons.settings,
             ),
-            SizedBox(
+            const SizedBox(
               height: 19,
             ),
-            ProfileOptions(
+            const ProfileOptions(
               title: 'Log Out',
               icon: Icons.logout_outlined,
             ),

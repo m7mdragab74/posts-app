@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:posts_app/models/data.dart';
 import 'package:posts_app/views/home.dart';
 import 'package:posts_app/widget/signUp/agree_terms.dart';
 import 'package:posts_app/widget/signUp/custom_botton.dart';
 import 'package:posts_app/widget/signUp/custom_text_field.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
@@ -31,39 +33,58 @@ class SignUpPage extends StatelessWidget {
                 const SizedBox(
                   height: 26,
                 ),
-                CustomTextField(
-                  label: 'Full Name',
-                  onChange: (value) {},
+                Consumer<postsDataModel>(
+                  builder: (context, fullName, child) {
+                    return CustomTextField(
+                      label: 'Full Name',
+                      onChange: (value) {
+                        fullName.name = value;
+                        fullName.nameNotifier();
+                      },
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                CustomTextField(
-                  label: 'Email',
-                  icon: const Icon(
-                    Icons.mail,
-                  ),
-                  onChange: (value) {},
+                Consumer<postsDataModel>(
+                  builder: (context, failEmail, child) {
+                    return CustomTextField(
+                      label: 'Email',
+                      onChange: (value) {
+                        failEmail.email = value;
+                        failEmail.emailNotifier();
+                      },
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                CustomTextField(
-                  label: 'Mobile Number',
-                  icon: const Icon(
-                    Icons.phone_iphone_outlined,
-                  ),
-                  onChange: (value) {},
+                Consumer<postsDataModel>(
+                  builder: (context, failNumber, child) {
+                    return CustomTextField(
+                      label: 'Mobile Number',
+                      onChange: (value) {
+                        failNumber.phoneNumber = value;
+                        failNumber.phone();
+                      },
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                CustomTextField(
-                  label: 'Image Url',
-                  icon: const Icon(
-                    Icons.image,
-                  ),
-                  onChange: (value) {},
+                Consumer<postsDataModel>(
+                  builder: (context, imageUrl, child) {
+                    return CustomTextField(
+                      label: 'Image Url',
+                      onChange: (value) {
+                        imageUrl.image = value;
+                        imageUrl.imageNotifier();
+                      },
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 15,
