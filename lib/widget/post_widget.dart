@@ -56,7 +56,7 @@ class _PostWidgetState extends State<PostWidget> {
       padding: const EdgeInsets.all(13),
       child: Container(
         padding: const EdgeInsets.all(7),
-        height: 270,
+        height: 280,
         decoration: BoxDecoration(
           color: const Color(0xff323243),
           borderRadius: BorderRadius.circular(20),
@@ -98,7 +98,7 @@ class _PostWidgetState extends State<PostWidget> {
             Text(
               widget.postModel.body,
               overflow: TextOverflow.ellipsis,
-              maxLines: 5,
+              maxLines: 4,
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18,
