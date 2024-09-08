@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:posts_app/models/data.dart';
+import 'package:provider/provider.dart';
 
 class BuildProfilePicture extends StatelessWidget {
   const BuildProfilePicture({super.key, required this.color});
@@ -9,10 +11,15 @@ class BuildProfilePicture extends StatelessWidget {
     return Center(
       child: Stack(
         children: [
-          const CircleAvatar(
-            radius: 70,
-            backgroundImage:
-                NetworkImage("https://avatar.iran.liara.run/public/31"),
+          Consumer<postsDataModel>(
+            builder: (context, image, child) {
+              return CircleAvatar(
+                radius: 70,
+                backgroundImage: NetworkImage(image.image.isNotEmpty
+                    ? image.image
+                    : 'https://avatar.iran.liara.run/public/31'),
+              );
+            },
           ),
           Positioned(
             bottom: 0,
