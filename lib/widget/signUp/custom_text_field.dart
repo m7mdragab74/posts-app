@@ -19,6 +19,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      style: TextStyle(color: Colors.white),
       cursorColor: Colors.white,
       cursorErrorColor: Colors.white,
       onChanged: onChange,
