@@ -95,7 +95,7 @@ class _PostWidgetState extends State<PostWidget> {
               height: 5,
             ),
             Text(
-              widget.postModel.body,
+              widget.postModel.info,
               overflow: TextOverflow.ellipsis,
               maxLines: 4,
               style: const TextStyle(

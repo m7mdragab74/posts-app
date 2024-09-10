@@ -1,11 +1,11 @@
 class PostModel {
   final String title;
-  final String body;
+  final String info;
   final int id;
 
   PostModel({
     required this.title,
-    required this.body,
+    required this.info,
     required this.id,
   });
 
@@ -13,7 +13,7 @@ class PostModel {
     return PostModel(
       id: json['id'],
       title: json['title'],
-      body: json['body'],
+      info: json['body'],
     );
   }
 
@@ -21,7 +21,7 @@ class PostModel {
     return {
       'id': id,
       'title': title,
-      'body': body,
+      'body': info,
     };
   }
 
@@ -29,7 +29,7 @@ class PostModel {
     return PostModel(
       id: map['id'],
       title: map['title'],
-      body: map['body'],
+      info: map['body'],
     );
   }
 }
