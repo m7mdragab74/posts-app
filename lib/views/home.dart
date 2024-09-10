@@ -3,8 +3,8 @@ import 'package:posts_app/models/post_model.dart';
 import 'package:posts_app/services/post_services.dart';
 import 'package:posts_app/views/fav_page.dart';
 import 'package:posts_app/views/profile_page.dart';
-import 'package:posts_app/widget/custom_nav_bar.dart';
-import 'package:posts_app/widget/post_widget.dart';
+import 'package:posts_app/widget/customNav/custom_nav_bar.dart';
+import 'package:posts_app/widget/postwidget/post_widget.dart';
 import 'package:dio/dio.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     PostService postService = PostService(Dio());
-    postsFuture = postService.getPostsTitleAndInfo();
+    postsFuture = postService.getPosts();
   }
 
   @override
@@ -72,7 +72,15 @@ class _HomePageState extends State<HomePage> {
               },
             );
           } else {
-            return const Center(child: Text('No posts available.'));
+            return const Center(
+              child: Text(
+                'No posts available.',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
           }
         },
       ),

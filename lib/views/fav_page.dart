@@ -3,8 +3,8 @@ import 'package:posts_app/database/db_helper.dart';
 import 'package:posts_app/models/post_model.dart';
 import 'package:posts_app/views/home.dart';
 import 'package:posts_app/views/profile_page.dart';
-import 'package:posts_app/widget/custom_nav_bar.dart';
-import 'package:posts_app/widget/post_widget.dart';
+import 'package:posts_app/widget/customNav/custom_nav_bar.dart';
+import 'package:posts_app/widget/postwidget/post_widget.dart';
 
 class FavPage extends StatefulWidget {
   const FavPage({super.key});
@@ -16,7 +16,7 @@ class FavPage extends StatefulWidget {
 class _FavPageState extends State<FavPage> {
   List<PostModel> _favorites = [];
   bool _isLoading = true;
-  int _selectedIndex = 1; // Default to FavPage
+  int _selectedIndex = 1;
 
   @override
   void initState() {
@@ -38,7 +38,6 @@ class _FavPageState extends State<FavPage> {
       _selectedIndex = index;
     });
 
-    // Navigate to the selected page
     switch (index) {
       case 0:
         Navigator.pushReplacement(
@@ -73,7 +72,7 @@ class _FavPageState extends State<FavPage> {
         ],
         color: HomePage.primaryColor,
         selectedIndex: _selectedIndex,
-        onItemSelected: _onItemTapped, // Handle page navigation
+        onItemSelected: _onItemTapped,
       ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -90,7 +89,10 @@ class _FavPageState extends State<FavPage> {
               ? const Center(
                   child: Text(
                     'No favorites yet',
-                    style: TextStyle(color: Colors.white), // Make text visible
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 )
               : ListView.builder(

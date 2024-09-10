@@ -1,13 +1,9 @@
 class PostModel {
+  final int id;
   final String title;
   final String info;
-  final int id;
 
-  PostModel({
-    required this.title,
-    required this.info,
-    required this.id,
-  });
+  PostModel({required this.id, required this.title, required this.info});
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
     return PostModel(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:posts_app/models/data.dart';
 import 'package:posts_app/views/fav_page.dart';
 import 'package:posts_app/views/home.dart';
-import 'package:posts_app/widget/custom_nav_bar.dart';
+import 'package:posts_app/widget/customNav/custom_nav_bar.dart';
 import 'package:posts_app/widget/profile/photo.dart';
 import 'package:posts_app/widget/profile/profile_options.dart';
 import 'package:provider/provider.dart';

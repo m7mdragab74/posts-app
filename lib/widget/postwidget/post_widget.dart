@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:posts_app/database/db_helper.dart';
 import 'package:posts_app/models/post_model.dart';
+import 'package:posts_app/views/comment_page.dart';
 
 class PostWidget extends StatefulWidget {
-  const PostWidget({
-    super.key,
-    required this.postModel,
-  });
+  const PostWidget({super.key, required this.postModel});
 
   final PostModel postModel;
 
@@ -16,6 +14,7 @@ class PostWidget extends StatefulWidget {
 
 class _PostWidgetState extends State<PostWidget> {
   bool isFavorite = false;
+
   @override
   void initState() {
     super.initState();
@@ -30,7 +29,7 @@ class _PostWidgetState extends State<PostWidget> {
         isFavorite = favorites.any((post) => post.id == widget.postModel.id);
       });
     } catch (e) {
-      print("Error checking if favorite: $e");
+      debugPrint("Error checking if favorite: $e");
     }
   }
 
@@ -46,7 +45,7 @@ class _PostWidgetState extends State<PostWidget> {
         isFavorite = !isFavorite;
       });
     } catch (e) {
-      print("Error toggling favorite: $e");
+      debugPrint("Error toggling favorite: $e");
     }
   }
 
@@ -91,16 +90,24 @@ class _PostWidgetState extends State<PostWidget> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 5,
-            ),
-            Text(
-              widget.postModel.info,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 4,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 18,
+            const SizedBox(height: 5),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        CommentPage(postId: widget.postModel.id),
+                  ),
+                );
+              },
+              child: Text(
+                widget.postModel.info,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 4,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
               ),
             ),
           ],

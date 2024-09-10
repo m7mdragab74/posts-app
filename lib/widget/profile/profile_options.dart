@@ -17,7 +17,7 @@ class ProfileOptions extends StatelessWidget {
         Icon(
           icon,
           color: const Color(0xFFCF4D68),
-          size: 40,
+          size: 30,
         ),
         const SizedBox(
           width: 17,

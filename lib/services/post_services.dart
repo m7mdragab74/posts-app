@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:posts_app/models/post_model.dart';
 
 class PostService {
@@ -6,19 +7,15 @@ class PostService {
 
   PostService(this.dio);
 
-  Future<List<PostModel>> getPostsTitleAndInfo() async {
+  Future<List<PostModel>> getPosts() async {
     try {
       Response response =
           await dio.get('https://jsonplaceholder.typicode.com/posts');
-      List<dynamic> posts = response.data;
-      List<PostModel> postList = [];
+      List<dynamic> postsData = response.data;
 
-      for (var post in posts) {
-        PostModel postModel = PostModel.fromJson(post);
-        postList.add(postModel);
-      }
-      return postList;
+      return postsData.map((data) => PostModel.fromJson(data)).toList();
     } catch (e) {
+      debugPrint("Error fetching posts: $e");
       return [];
     }
   }
