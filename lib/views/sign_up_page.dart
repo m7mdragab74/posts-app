@@ -91,6 +91,7 @@ class SignUpPage extends StatelessWidget {
                 ),
                 CustomTextField(
                   label: 'Password',
+                  obscureText: true,
                   icon: const Icon(
                     Icons.visibility_off,
                   ),
